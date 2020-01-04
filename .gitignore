@@ -11,3 +11,6 @@ bin/Debug/SimpleCalculator.exe.config
 bin/Debug/SimpleCalculator.exe
 .vs/SimpleCalculator/v16/Server/sqlite3/storage.ide-shm
 .vs/SimpleCalculator/v16/Server/sqlite3/storage.ide
+SimpleCalculator.sln
+.vs/SimpleCalculator/v16/.suo
+.vs/SimpleCalculator/DesignTimeBuild/.dtbcache
