@@ -80,7 +80,7 @@ namespace SimpleCalculator.Classes.Abstracts
                     mathSymbol = new DivisionSymbol();
                     break;
                 default:
-                    mathSymbol = new DigitSymbol(int.Parse(symbol));
+                    mathSymbol = new DigitSymbol(double.Parse(symbol));
                     break;
             }
             return mathSymbol;

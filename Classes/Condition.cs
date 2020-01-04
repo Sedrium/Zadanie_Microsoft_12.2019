@@ -14,9 +14,9 @@ namespace SimpleCalculator.Classes
         {
             return blackboard.FirstOrDefault(p => p is IOperatorSymbol && solveSymbols == (p as IOperatorSymbol).Priority);
         }
-        public static bool ListContainsAnySymbolEqualToSolveSymbol(IList<IMathSymbol> returnList, Operations stage)
+        public static bool ListContainsAnySymbolEqualToSolveSymbol(IList<IMathSymbol> ListOfSymbols, Operations stage)
         {
-            return returnList.FirstOrDefault(p => p is IOperatorSymbol && stage == (p as IOperatorSymbol).Priority) != null;
+            return ListOfSymbols.FirstOrDefault(p => p is IOperatorSymbol && stage == (p as IOperatorSymbol).Priority) != null;
         }
         public static bool StringIsNotNull(string input)
         {

@@ -25,27 +25,26 @@ namespace SimpleCalculator.Classes.CalculatorTypes
             expressionAsObjects = CreateCollectionOfSymbols(Expression);
         }
 
-
         private void DevideByZero()
         {
             Regex DevideByZeroRegex = new Regex(@"([/]{1}[0]+)");
             var isDevideByZero = DevideByZeroRegex.IsMatch(Expression);
             if (isDevideByZero)
-                throw new DivideByZeroException("dont devide by 0");
+                throw new DivideByZeroException("EX1002|Devide by 0 is impossible");
         }
         private void WrongStyleOfExpression()
         {
             Regex correctLookingExpression = new Regex(@"^[0-9]+([+/*-]{1}[0-9]+)+$");
             var isLookCorrect = correctLookingExpression.IsMatch(Expression);
             if (!isLookCorrect)
-                throw new Exception("Wrong input expression");
+                throw new Exception("EX1001|Wrong input expression");
         }
         private void UndefindedChars()
         {
             Regex compatibleChars = new Regex(@"^[0-9/+*-]+$");
             var charsAreCompatible = compatibleChars.IsMatch(Expression);
             if (!charsAreCompatible)
-                throw new Exception("Wrong input expression");
+                throw new Exception("EX1003|Unexpected chars");
         }
     }
 }

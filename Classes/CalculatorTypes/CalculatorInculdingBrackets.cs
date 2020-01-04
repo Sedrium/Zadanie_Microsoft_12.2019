@@ -22,16 +22,39 @@ namespace SimpleCalculator.Classes.CalculatorTypes
                 
                 var trimedInnerBracket = innerBracket.Value.TrimStart('(').TrimEnd(')');
                 var expressionAsObjects = CreateCollectionOfSymbols(trimedInnerBracket);
+                expressionAsObjects = SymbolsFollowingEachOtherProblemSolve(expressionAsObjects);
                 var result = Solve(expressionAsObjects, Operations.MulAndDiv);
                 result = Solve(result, Operations.SubAndAdd);
 
                 Expression = string.Format(temporaryExpression, (result[0] as IDigit).Value);
             }
             expressionAsObjects = CreateCollectionOfSymbols(Expression);
+            expressionAsObjects = SymbolsFollowingEachOtherProblemSolve(expressionAsObjects);
         }
         public override void ValidateData()
         {
-            //No time enough to implement this. similary to unit test.
+        }
+
+        private IList<IMathSymbol> SymbolsFollowingEachOtherProblemSolve(IList<IMathSymbol> expression)
+        {
+            int index = 0;
+            bool loop = true;
+            while (index < expression.Count - 1)
+            {
+                if (expression[index] is AdditionSymbol && expression[index + 1] is SubtractionSymbol)
+                {
+                    expression[index] = new SubtractionSymbol();
+                    expression.RemoveAt(index + 1);
+
+                }
+                else if ((expression[index] is DivisionSymbol || expression[index] is MultiplicationSymbol)  && expression[index + 1] is SubtractionSymbol)
+                {
+                    expression.RemoveAt(index + 1);
+                    expression[index + 1] = new DigitSymbol(-(expression[index + 1] as DigitSymbol).Value);
+                }
+                index++;
+            }
+            return expression;
         }
     }
 }
