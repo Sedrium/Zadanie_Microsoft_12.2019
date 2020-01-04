@@ -8,9 +8,7 @@ namespace SimpleCalculator.Classes
         public Operations Priority => Operations.MulAndDiv;
         public double Solve(double firstDigit, double nextDigit)
         {
-            if (nextDigit==0)
-                throw new System.Exception("EX1002|Devide by 0 is impossible");
-            return firstDigit / nextDigit; ;
+            return firstDigit / nextDigit;
         }
     }
 }

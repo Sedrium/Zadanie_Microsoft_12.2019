@@ -4,7 +4,7 @@ namespace SimpleCalculator.Enums
 {
     public enum SplitPatterns
     {
-        [Description(@"([+*/-]{1})")]
+        [Description(@"([0-9]+)")]
         ByDigits,
         [Description(@"\([0-9+*/-]+\)")]
         ByBracket,

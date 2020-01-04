@@ -22,14 +22,12 @@ namespace SimpleCalculator.Classes.CalculatorTypes
                 
                 var trimedInnerBracket = innerBracket.Value.TrimStart('(').TrimEnd(')');
                 var expressionAsObjects = CreateCollectionOfSymbols(trimedInnerBracket);
-                expressionAsObjects = SymbolsFollowingEachOtherProblemSolve(expressionAsObjects);
                 var result = Solve(expressionAsObjects, Operations.MulAndDiv);
                 result = Solve(result, Operations.SubAndAdd);
 
                 Expression = string.Format(temporaryExpression, (result[0] as IDigit).Value);
             }
             expressionAsObjects = CreateCollectionOfSymbols(Expression);
-            expressionAsObjects = SymbolsFollowingEachOtherProblemSolve(expressionAsObjects);
         }
         public override void ValidateData()
         {
@@ -54,6 +52,7 @@ namespace SimpleCalculator.Classes.CalculatorTypes
                 index++;
             }
             return expression;
+
         }
     }
 }
