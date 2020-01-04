@@ -41,16 +41,15 @@ namespace SimpleCalculator.Classes.CalculatorTypes
             bool loop = true;
             while (index < expression.Count - 1)
             {
-                if (expression[index] is AdditionSymbol && expression[index + 1] is SubtractionSymbol)
-                {
-                    expression[index] = new SubtractionSymbol();
-                    expression.RemoveAt(index + 1);
-
-                }
-                else if ((expression[index] is DivisionSymbol || expression[index] is MultiplicationSymbol)  && expression[index + 1] is SubtractionSymbol)
+                if ((expression[index] is DivisionSymbol || expression[index] is MultiplicationSymbol || expression[index] is AdditionSymbol)  && expression[index + 1] is SubtractionSymbol)
                 {
                     expression.RemoveAt(index + 1);
                     expression[index + 1] = new DigitSymbol(-(expression[index + 1] as DigitSymbol).Value);
+                }
+                else if(expression[index] is SubtractionSymbol && expression[index + 1] is DigitSymbol && index == 0)
+                {
+                    expression.RemoveAt(index);
+                    expression[index] = new DigitSymbol(-(expression[index] as DigitSymbol).Value);
                 }
                 index++;
             }
