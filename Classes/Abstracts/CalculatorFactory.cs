@@ -29,6 +29,7 @@ namespace SimpleCalculator.Classes.Abstracts
         #region Useful Methods
         protected virtual IList<IMathSymbol> CreateCollectionOfSymbols(string expression)
         {
+            
             var splittedExpression = SplitExpression(expression);
             return CreateListOfSymbols(splittedExpression);
         }
@@ -80,7 +81,7 @@ namespace SimpleCalculator.Classes.Abstracts
                     mathSymbol = new DivisionSymbol();
                     break;
                 default:
-                    mathSymbol = new DigitSymbol(int.Parse(symbol));
+                    mathSymbol = new DigitSymbol(double.Parse(symbol));
                     break;
             }
             return mathSymbol;

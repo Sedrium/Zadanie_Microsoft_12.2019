@@ -19,15 +19,17 @@ namespace SimpleCalculator.Classes.CalculatorTypes
             {
                 var innerBracket = RegexInnerBrackets.Match(Expression);
                 var temporaryExpression = RegexInnerBrackets.Replace(Expression, "{0}", 1);
-                
+
                 var trimedInnerBracket = innerBracket.Value.TrimStart('(').TrimEnd(')');
                 var expressionAsObjects = CreateCollectionOfSymbols(trimedInnerBracket);
+                expressionAsObjects = SymbolsFollowingEachOtherProblemSolve(expressionAsObjects);
                 var result = Solve(expressionAsObjects, Operations.MulAndDiv);
                 result = Solve(result, Operations.SubAndAdd);
 
                 Expression = string.Format(temporaryExpression, (result[0] as IDigit).Value);
             }
             expressionAsObjects = CreateCollectionOfSymbols(Expression);
+            expressionAsObjects = SymbolsFollowingEachOtherProblemSolve(expressionAsObjects);
         }
         public override void ValidateData()
         {
@@ -36,7 +38,6 @@ namespace SimpleCalculator.Classes.CalculatorTypes
         private IList<IMathSymbol> SymbolsFollowingEachOtherProblemSolve(IList<IMathSymbol> expression)
         {
             int index = 0;
-            bool loop = true;
             while (index < expression.Count - 1)
             {
                 if ((expression[index] is DivisionSymbol || expression[index] is MultiplicationSymbol || expression[index] is AdditionSymbol)  && expression[index + 1] is SubtractionSymbol)
