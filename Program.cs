@@ -18,8 +18,8 @@ namespace SimpleCalculator
     {
         static void Main(string[] args)
         {
-            string expressionWithBrackets = "22/((6+(-1*4-2))+(21-2))"; // 22/((6+(-1*4-2))+(21-2))  = 1,15789
-            string expression = "22/6+1*4-2+21-2";                  // = 24.6(6) 
+            string expressionWithBrackets = "(22/((6+(-1*4-2))+(21-2-(-1))))*(-1)"; // (22/((6+(-1*4-2))+(21-2-(-1))))*(-1)  = -1,1
+            string expression = "22/6+1*4-2+21-2";   // = 24.6(6) 
             
             Calculator simple = new Calculator(new Classes.CalculatorTypes.SimpleCalculator());
             var result = simple.SolveExpression(expression);

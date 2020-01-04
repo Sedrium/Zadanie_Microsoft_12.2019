@@ -22,38 +22,40 @@ namespace SimpleCalculator.Classes.CalculatorTypes
 
                 var trimedInnerBracket = innerBracket.Value.TrimStart('(').TrimEnd(')');
                 var expressionAsObjects = CreateCollectionOfSymbols(trimedInnerBracket);
-                expressionAsObjects = SymbolsFollowingEachOtherProblemSolve(expressionAsObjects);
+                expressionAsObjects = StickSubtractionWithDigit(expressionAsObjects);
                 var result = Solve(expressionAsObjects, Operations.MulAndDiv);
                 result = Solve(result, Operations.SubAndAdd);
 
                 Expression = string.Format(temporaryExpression, (result[0] as IDigit).Value);
             }
             expressionAsObjects = CreateCollectionOfSymbols(Expression);
-            expressionAsObjects = SymbolsFollowingEachOtherProblemSolve(expressionAsObjects);
+            expressionAsObjects = StickSubtractionWithDigit(expressionAsObjects);
         }
         public override void ValidateData()
         {
+
         }
 
-        private IList<IMathSymbol> SymbolsFollowingEachOtherProblemSolve(IList<IMathSymbol> expression)
+        private IList<IMathSymbol> StickSubtractionWithDigit(IList<IMathSymbol> expression)
         {
-            int index = 0;
-            while (index < expression.Count - 1)
+            int itemIndex = 0;
+            while (itemIndex < expression.Count - 1)
             {
-                if ((expression[index] is DivisionSymbol || expression[index] is MultiplicationSymbol || expression[index] is AdditionSymbol)  && expression[index + 1] is SubtractionSymbol)
-                {
-                    expression.RemoveAt(index + 1);
-                    expression[index + 1] = new DigitSymbol(-(expression[index + 1] as DigitSymbol).Value);
-                }
-                else if(expression[index] is SubtractionSymbol && expression[index + 1] is DigitSymbol && index == 0)
-                {
-                    expression.RemoveAt(index);
-                    expression[index] = new DigitSymbol(-(expression[index] as DigitSymbol).Value);
-                }
-                index++;
+                if (Condition.IsThereSubtractionSymbolAfterOtherSymbols(expression, itemIndex))
+                    StickSubtractionToDigit(expression,itemIndex);
+                else if(Condition.IsFirstDigitNegative(expression,itemIndex))
+                    StickSubtractionToDigit(expression,itemIndex);
+                itemIndex++;
             }
             return expression;
+        }
 
+        private static void StickSubtractionToDigit(IList<IMathSymbol> expression, int itemIndex)
+        {
+            var FirstDigitAfterSubtractionSymbol = expression.Where((item, index) => item is IDigit && (index == itemIndex + 1 || index == itemIndex + 2)).First();
+            var indexOfSubtracionBeforeFirstDigit = expression.IndexOf(FirstDigitAfterSubtractionSymbol)-1;
+            expression[indexOfSubtracionBeforeFirstDigit] = new DigitSymbol(-(FirstDigitAfterSubtractionSymbol as IDigit).Value);
+            expression.Remove(FirstDigitAfterSubtractionSymbol);
         }
     }
 }

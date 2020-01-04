@@ -25,5 +25,19 @@ namespace SimpleCalculator.Classes
                 isStringNull = true;
             return !isStringNull;
         }
+        public static bool IsThereSubtractionSymbolAfterOtherSymbols(IList<IMathSymbol> expression, int index)
+        {
+            bool isThereSybtractionSymbol = false;
+            if (expression[index] is IOperatorSymbol && expression[index + 1] is SubtractionSymbol)
+                isThereSybtractionSymbol = true;
+            return isThereSybtractionSymbol;
+        }
+        public static bool IsFirstDigitNegative(IList<IMathSymbol> expression, int index)
+        {
+            bool IsNegative = false;
+            if (expression[index] is SubtractionSymbol && expression[index + 1] is DigitSymbol && index == 0)
+                IsNegative = true;
+            return IsNegative;
+        }
     }
 }

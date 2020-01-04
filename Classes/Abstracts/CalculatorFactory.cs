@@ -26,7 +26,7 @@ namespace SimpleCalculator.Classes.Abstracts
             Result = (SolveRestOfExpression.First() as IDigit).Value;
         }
 
-        #region Useful Methods
+        #region  Methods
         protected virtual IList<IMathSymbol> CreateCollectionOfSymbols(string expression)
         {
             
