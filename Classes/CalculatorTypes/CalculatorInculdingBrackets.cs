@@ -33,7 +33,23 @@ namespace SimpleCalculator.Classes.CalculatorTypes
         }
         public override void ValidateData()
         {
+            DevideByZero();
+            UndefindedChars();
+        }
 
+        private void DevideByZero()
+        {
+            Regex DevideByZeroRegex = new Regex(@"([/]{1}[0]+)");
+            var isDevideByZero = DevideByZeroRegex.IsMatch(Expression);
+            if (isDevideByZero)
+                throw new DivideByZeroException("EX1002|Devide by 0 is impossible");
+        }
+        private void UndefindedChars()
+        {
+            Regex compatibleChars = new Regex(@"^[0-9()/+*-]+$");
+            var charsAreCompatible = compatibleChars.IsMatch(Expression);
+            if (!charsAreCompatible)
+                throw new Exception("EX1003|Unexpected chars");
         }
 
         private IList<IMathSymbol> StickSubtractionWithDigit(IList<IMathSymbol> expression)

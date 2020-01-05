@@ -10,13 +10,13 @@ namespace SimpleCalculator.Classes
 {
     public static class Condition
     {
-        public static IMathSymbol TakeFirstSymbolEqualToSolveSymbol(IList<IMathSymbol> blackboard, Operations solveSymbols)
+        public static IMathSymbol TakeFirstSymbolEqualToSolveSymbol(IList<IMathSymbol> expression, Operations solveSymbols)
         {
-            return blackboard.FirstOrDefault(p => p is IOperatorSymbol && solveSymbols == (p as IOperatorSymbol).Priority);
+            return expression.FirstOrDefault(p => p is IOperatorSymbol && solveSymbols == (p as IOperatorSymbol).Priority);
         }
-        public static bool ListContainsAnySymbolEqualToSolveSymbol(IList<IMathSymbol> ListOfSymbols, Operations stage)
+        public static bool ListContainsAnySymbolEqualToSolveSymbol(IList<IMathSymbol> ListOfSymbols, Operations solveSymbols)
         {
-            return ListOfSymbols.FirstOrDefault(p => p is IOperatorSymbol && stage == (p as IOperatorSymbol).Priority) != null;
+            return ListOfSymbols.FirstOrDefault(p => p is IOperatorSymbol && solveSymbols == (p as IOperatorSymbol).Priority) != null;
         }
         public static bool StringIsNotNull(string input)
         {

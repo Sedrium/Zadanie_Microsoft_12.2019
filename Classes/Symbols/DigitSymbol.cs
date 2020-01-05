@@ -2,7 +2,7 @@
 
 namespace SimpleCalculator.Classes
 {
-    internal class DigitSymbol : IMathSymbol, IDigit
+    public class DigitSymbol : IMathSymbol, IDigit
     {
         public DigitSymbol(double value)
         {

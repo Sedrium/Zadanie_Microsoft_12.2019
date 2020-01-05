@@ -25,7 +25,6 @@ namespace SimpleCalculator.Classes.CalculatorTypes
             expressionAsObjects = CreateCollectionOfSymbols(Expression);
         }
 
-
         private void DevideByZero()
         {
             Regex DevideByZeroRegex = new Regex(@"([/]{1}[0]+)");

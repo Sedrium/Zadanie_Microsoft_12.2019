@@ -3,7 +3,7 @@ using SimpleCalculator.Interfaces;
 
 namespace SimpleCalculator.Classes
 {
-    internal class AdditionSymbol : IMathSymbol, IOperatorSymbol
+    public class AdditionSymbol : IMathSymbol, IOperatorSymbol
     {
         public Operations Priority => Operations.SubAndAdd;
         public double Solve(double firstDigit, double nextDigit)
