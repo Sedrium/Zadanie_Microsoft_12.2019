@@ -29,7 +29,6 @@ namespace SimpleCalculator.Classes.Abstracts
         #region  Methods
         protected virtual IList<IMathSymbol> CreateCollectionOfSymbols(string expression)
         {
-            
             var splittedExpression = SplitExpression(expression);
             return CreateListOfSymbols(splittedExpression);
         }
@@ -48,20 +47,6 @@ namespace SimpleCalculator.Classes.Abstracts
                 DigitAndOperators.Remove(mathsOperator);
             }
             return DigitAndOperators;
-        }
-
-        private IEnumerable<string> SplitExpression(string expression)
-        {
-            var splitExpression = Regex.Split(expression, SplitPatterns.ByDigits.GetDescription());
-            var WithoutWhiteSpaces = splitExpression.Where(Condition.StringIsNotNull);
-            return WithoutWhiteSpaces;
-        }
-        private IList<IMathSymbol> CreateListOfSymbols(IEnumerable<string> splittedExpression)
-        {
-            IList<IMathSymbol> expressionAsObjects = new List<IMathSymbol>();
-            foreach (var stringSymbol in splittedExpression)
-                expressionAsObjects.Add(CreateSpecificSymbol(stringSymbol));
-            return expressionAsObjects;
         }
         protected virtual IMathSymbol CreateSpecificSymbol(string symbol)
         {
@@ -86,6 +71,20 @@ namespace SimpleCalculator.Classes.Abstracts
             }
             return mathSymbol;
         }
+        private IEnumerable<string> SplitExpression(string expression)
+        {
+            var splitExpression = Regex.Split(expression, SplitPatterns.ByDigits.GetDescription());
+            var WithoutWhiteSpaces = splitExpression.Where(Condition.StringIsNotNull);
+            return WithoutWhiteSpaces;
+        }
+        private IList<IMathSymbol> CreateListOfSymbols(IEnumerable<string> splittedExpression)
+        {
+            IList<IMathSymbol> expressionAsObjects = new List<IMathSymbol>();
+            foreach (var stringSymbol in splittedExpression)
+                expressionAsObjects.Add(CreateSpecificSymbol(stringSymbol));
+            return expressionAsObjects;
+        }
+
         #endregion
     }
 }

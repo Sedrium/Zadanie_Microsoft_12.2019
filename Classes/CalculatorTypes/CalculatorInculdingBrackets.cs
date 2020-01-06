@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace SimpleCalculator.Classes.CalculatorTypes
 {
-    class CalculatorInculdingBrackets : CalculatorFactory
+    public class CalculatorInculdingBrackets : CalculatorFactory
     {
         public override void PrepareCollectionOfSymbols()
         {

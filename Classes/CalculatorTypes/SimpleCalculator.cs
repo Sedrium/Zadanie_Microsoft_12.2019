@@ -16,7 +16,7 @@ namespace SimpleCalculator.Classes.CalculatorTypes
         public override void ValidateData()
         {
             DevideByZero();
-            WrongStyleOfExpression();
+            WrongFormatOfExpression();
             UndefindedChars();
         }
 
@@ -32,7 +32,7 @@ namespace SimpleCalculator.Classes.CalculatorTypes
             if (isDevideByZero)
                 throw new DivideByZeroException("EX1002|Devide by 0 is impossible");
         }
-        private void WrongStyleOfExpression()
+        private void WrongFormatOfExpression()
         {
             Regex correctLookingExpression = new Regex(@"^[0-9]+([+/*-]{1}[0-9]+)+$");
             var isLookCorrect = correctLookingExpression.IsMatch(Expression);

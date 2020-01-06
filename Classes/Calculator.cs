@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SimpleCalculator.Classes
 {
-    class Calculator 
+    public class Calculator 
     {
         private CalculatorFactory calculator;
      
