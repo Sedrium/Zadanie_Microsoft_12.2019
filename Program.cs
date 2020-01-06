@@ -25,9 +25,12 @@ namespace SimpleCalculator
             var result = simple.SolveExpression(expression);
             Calculator bracket = new Calculator(new Classes.CalculatorTypes.CalculatorInculdingBrackets()); // this type can solve both expression. maybe SimpleCalculator is not necessary
             var result2 = bracket.SolveExpression(expressionWithBrackets);
+
+
+
         }
 
-        public static double Evaluate(string expression) //  shorter for simple expression
+        public static double Evaluate(string expression) 
         {
             return (double)new System.Xml.XPath.XPathDocument
             (new StringReader("<r/>")).CreateNavigator().Evaluate
